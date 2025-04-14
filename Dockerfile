@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY requirements.txt ./app
 
-RUN pip install --no-cache-dir -r app/requirements.txt
+RUN pip install --no-cache-dir -r ./app/requirements.txt
 
 FROM --platform=arm64 python:3.13-alpine AS runtime
 
