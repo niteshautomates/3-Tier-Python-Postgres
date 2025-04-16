@@ -1,0 +1,6 @@
+ CREATE USER root WITH PASSWORD 'root';
+CREATE DATABASE my_database;
+GRANT ALL PRIVILEGES ON DATABASE my_database TO root;
+\c my_database
+GRANT ALL PRIVILEGES ON SCHEMA public TO root;
+GRANT CREATE ON DATABASE my_database TO root;

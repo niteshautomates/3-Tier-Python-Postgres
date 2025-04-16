@@ -1,0 +1,11 @@
+FROM postgres:15-alpine
+
+# Set environment variables for the PostgreSQL user and database
+ENV POSTGRES_USER=root
+ENV POSTGRES_PASSWORD=root
+ENV POSTGRES_DB=my_database
+
+# Copy the initialization script to the entrypoint.d directory
+COPY init.sql /docker-entrypoint-initdb.d/
+
+EXPOSE 5432
