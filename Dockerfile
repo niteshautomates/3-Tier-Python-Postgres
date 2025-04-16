@@ -1,17 +1,18 @@
-FROM python:3.13-alpine AS base
+FROM python:3.11-alpine AS base
 
 WORKDIR /app
 
-COPY requirements.txt ./app
+COPY requirements.txt ./
 
-RUN pip install --no-cache-dir -r ./app/requirements.txt
 
-FROM --platform=arm64 python:3.13-alpine AS runtime
+RUN python3 -m venv appnv && source appnv/bin/activate
+
+RUN pip3 install --no-cache -r /app/requirements.txt
 
 WORKDIR /app
 
-COPY . ./app/
+COPY . .
 
 EXPOSE 5000
 
-CMD [ "python", "./app/run.py" ]
+CMD [ "python3", "run.py" ]
