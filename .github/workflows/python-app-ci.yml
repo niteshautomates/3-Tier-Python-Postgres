@@ -6,6 +6,10 @@ name: Python application
 on:
   push:
     branches: [ "develop" ]
+    paths-ignore:
+      - "helm/**"
+      - "README.md"
+      - "K8s/**"
 jobs:
   build:
 
@@ -64,12 +68,12 @@ jobs:
             context: .
             file: ./Dockerfile
             push: true
-            tags: ${{ vars.DOCKERHUB_USERNAME }}/python-test:${{github.run_id}}
+            tags: ${{ vars.DOCKERHUB_USERNAME }}/python-web-app:${{github.run_id}}
       
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@0.28.0
         with:
-          image-ref: 'docker.io/nitesh2611/python-test:${{github.run_id}}'
+          image-ref: 'docker.io/nitesh2611/python-web-app:${{github.run_id}}'
           format: 'table'
           exit-code: '0'
           ignore-unfixed: true

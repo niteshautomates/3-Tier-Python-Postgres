@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "../../.."
+		},
+		{
+			"path": "../../../../devops-class-practice-projects/3-Tier-DotNET-MongoDB/3-Tier-DotNET-MongoDB"
+		}
+	],
+	"settings": {
+		"yaml.schemas": {
+			"kubernetes://schema/apps/v1@deployment": "file:///Users/niteshwayafalkar/Desktop/niteshops/aws-packer-terraform/eks-cluster/manifest-files/app.yml"
+		},
+		"git.ignoreLimitWarning": true
+	}
+}
