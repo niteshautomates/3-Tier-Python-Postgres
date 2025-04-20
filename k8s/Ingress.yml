@@ -1,3 +1,4 @@
+#
 # https://kubernetes.io/docs/concepts/services-networking/ingress/#the-ingress-resource
 
 apiVersion: networking.k8s.io/v1
@@ -5,13 +6,9 @@ kind: Ingress
 metadata:
   name: python-web-app-ingress
   namespace: python-web-app
-  annotations:
-     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
-  ingressClassName: nginx
   rules:
-  - host: www.python-postgres-app.com 
-    http:
+  -  http:
       paths:
       - path: /
         pathType: Prefix

@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pg-deployment
+  namespace: python-web-app
+  labels:
+    app: postgresql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgresql
+  template:
+    metadata:
+      name: postgresql
+      labels:
+        app: postgresql
+    spec:
+      containers:
+        - name: python-pg-db
+          image: nitesh2611/python-pg-db:14557629597
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - name: local-storage
+              mountPath: /home/ubuntu/data
+      volumes:
+        - name: local-storage
+          persistentVolumeClaim:
+            claimName: pvc
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pg-service
+  namespace: python-web-app
+spec:
+  selector:
+    app: postgresql
+  ports:
+    - port: 5432
+      targetPort: 5432
+      protocol: TCP
