@@ -1,48 +1,12 @@
+# postgresql-persistent-volume-claim.yaml (Optional, if you're not using dynamic provisioning)
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: postgres-data-pvc
-  namespace: python-web-app
-  labels:
-    app: postgres
+  name: postgresql-data-0
+  namespace: python-web-app # The naming convention will depend on your StatefulSet
 spec:
-  storageClassName: postgres-storageclass
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: "500Mi"
-
----
-
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: postgres-log-pvc
-  namespace: python-web-app
-  labels:
-    app: postgres
-spec:
-  storageClassName: postgres-storageclass
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: "250Mi"
-
----
-
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: postgres-backup-pvc
-  namespace: python-web-app
-  labels:
-    app: postgres
-spec:
-  storageClassName: postgres-storageclass
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: "128Mi"
+      storage: 10Gi # Should match the volumeClaimTemplates in the StatefulSet

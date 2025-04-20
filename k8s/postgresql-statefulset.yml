@@ -1,61 +1,41 @@
+# postgresql-statefulset.yaml
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: postgresql
+  name: postgresql-ss
   namespace: python-web-app
-  labels:
-    app: postgres
 spec:
-  serviceName: postgres-service
-  replicas: 1
+  serviceName: "postgres-service"
+  replicas: 1 # You can scale this up for redundancy if needed
   selector:
     matchLabels:
-      app: postgres
+      app: postgresql
   template:
     metadata:
       labels:
-        app: postgres
+        app: postgresql
     spec:
-      terminationGracePeriodSeconds: 30
-      securityContext:
-        fsGroup: 999
       containers:
-        - name: postgres
-          image: nitesh2611/python-pg-db:1.0.1
-          args:
-            - "-c"
-            - "log_directory=/mnt/postgresql-16/pglogs/logs"
-            - "-c"
-            - "data_directory=/mnt/postgresql-16/pgdata/data"
-          env:
-            - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: postgresql-secret
-                  key: POSTGRES_PASSWORD
-            - name: PGDATA
-              value: /mnt/postgresql-16/pgdata/data
-            - name: PG_LOG
-              value: /mnt/postgresql-16/pglogs/logs
-          volumeMounts:
-            - name: pgdata
-              mountPath: /mnt/postgresql-16/pgdata
-            - name: pgsqlos
-              mountPath: /var/opt/pgsql
-            - name: pgbackup
-              mountPath: /mnt/postgresql-16/pgbackup
-            - name: pglogs
-              mountPath: /mnt/postgresql-16/pglogs
-      volumes:
+      - name: postgresql
+        image: postgres:15-alpine # Or your preferred PostgreSQL image and version
+        ports:
+        - containerPort: 5432
+          name: postgres
+        env:
+        - name: POSTGRES_USER
+          value: root
+        - name: POSTGRES_PASSWORD
+          value: root
+        - name: POSTGRES_DB
+          value: my_database
+        volumeMounts:
         - name: pgdata
-          persistentVolumeClaim:
-            claimName: postgres-data-pvc
-        - name: pgsqlos
-          persistentVolumeClaim:
-            claimName: pgsql-os
-        - name: pglogs
-          persistentVolumeClaim:
-            claimName: postgres-log-pvc
-        - name: pgbackup
-          persistentVolumeClaim:
-            claimName: postgres-backup-pvc
+          mountPath: /var/lib/postgresql/data
+  volumeClaimTemplates:
+  - metadata:
+      name: pgdata
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 10Gi # Adjust the storage size as needed
