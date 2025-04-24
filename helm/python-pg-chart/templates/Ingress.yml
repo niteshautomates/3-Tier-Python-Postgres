@@ -1,0 +1,19 @@
+#
+# https://kubernetes.io/docs/concepts/services-networking/ingress/#the-ingress-resource
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: python-web-app-ingress
+  namespace: python-web-app
+spec:
+  rules:
+  -  http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: python-web-svc
+            port:
+              number: 8500
