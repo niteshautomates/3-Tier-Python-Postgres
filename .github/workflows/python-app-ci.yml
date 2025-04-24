@@ -101,7 +101,7 @@ jobs:
             git push   
 
   build-python-pg-db-and-push:     
-    needs: [build-python-img-and-push]
+    needs: [update-python-app-img-in-helm-chart]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
