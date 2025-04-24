@@ -89,7 +89,7 @@ jobs:
             token: ${{ secrets.TOKEN }}
         - name: Update image tag in helm chart
           run: |
-            sed -i "s/tag: .*tag: "${{github.run_id}}/g" helm/python-web-app/values.yaml
+            sed -i 's/tag: .*tag: "${{github.run_id}}"/' helm/python-web-app/values.yaml
             cat helm/python-web-app/values.yaml
             echo "Updated image tag in helm chart"
         - name: Commit changes
@@ -149,7 +149,7 @@ jobs:
             token: ${{ secrets.TOKEN }}
         - name: Update image tag in helm chart
           run: |
-            sed -i "s/tag: .*tag: "${{github.run_id}}/g" helm/python-pg-db/values.yaml
+            sed -i 's/tag: .*tag: "${{github.run_id}}"/' helm/python-pg-db/values.yaml
             cat helm/python-pg-db/values.yaml
             echo "Updated image tag in helm chart"
         - name: Commit changes
