@@ -12,14 +12,14 @@ image:
   # This sets the pull policy for images.
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "14656646989"
+  tag: "14660481283"
 
 postgresql:
   repository: "nitesh2611/python-pg-db"
   # This sets the pull policy for images.
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  pg_tag: "14656646989"
+  pg_tag: "14660481283"
 
 # This is for setting up a service more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/
 postgresService:
