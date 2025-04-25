@@ -156,6 +156,7 @@ jobs:
           run: |
             git config --global user.email "niteshwayafalkar@gmail.com"
             git config --global user.name "Nitesh Wayafalkar"
+            git pull origin develop
             git add helm/python-pg-chart/values.yaml
             git commit -m "Update tag in Helm chart"
             git push   
