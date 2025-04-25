@@ -149,6 +149,7 @@ jobs:
             token: ${{ secrets.TOKEN }}
         - name: Update image tag in helm chart
           run: |
+            git pull origin develop
             sed -i 's/pg_tag: .*/pg_tag: "${{github.run_id}}"/' helm/python-pg-chart/values.yaml
             cat helm/python-pg-chart/values.yaml
             echo "Updated image tag in helm chart"
@@ -156,7 +157,6 @@ jobs:
           run: |
             git config --global user.email "niteshwayafalkar@gmail.com"
             git config --global user.name "Nitesh Wayafalkar"
-            git pull origin develop
             git add helm/python-pg-chart/values.yaml
             git commit -m "Update tag in Helm chart"
             git push   
