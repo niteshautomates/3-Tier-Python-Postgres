@@ -10,6 +10,7 @@ on:
       - "helm/**"
       - "README.md"
       - "k8s/**"
+      - "eks-cluster/**"
 jobs:
   build:
 

@@ -18,12 +18,12 @@ spec:
     spec:
       containers:
         - name: python-pg-db
-          image: {{ .Values.postgresql.repository }}:{{ .Values.postgresql.tag }}
+          image: {{ .Values.postgresql.repository }}:{{ .Values.postgresql.pg_tag }}
           ports:
             - containerPort: 5432
           volumeMounts:
-            - name: {{ .Values.volumeMounts.name }}
-              mountPath: {{ .Values.volumeMounts.mountPath }}
+            - name: local-storage
+              mountPath: "/root/data"
       volumes:
         - name: local-storage
           persistentVolumeClaim:
@@ -39,6 +39,6 @@ spec:
   selector:
     app: postgresql
   ports:
-    - port: {{ .Values.postgresService.port }}
-      targetPort: {{ .Values.targetPort.port }}
-      protocol: {{ .Values.targetPort.protocol }}
+    - port: 5432
+      targetPort: 5432
+      protocol: TCP

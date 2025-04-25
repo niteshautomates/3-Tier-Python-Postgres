@@ -9,6 +9,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   volumeMode: Filesystem
-  storageClassName: local-storage  
+  storageClassName: manual
+  persistentVolumeReclaimPolicy: Retain  
   hostPath:
-    path: /home/ubuntu/data    
+    path: /root/data    

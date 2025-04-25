@@ -11,4 +11,4 @@ spec:
   volumeMode: Filesystem
   storageClassName: local-storage  
   hostPath:
-    path: /home/ubuntu/data    
+    path: /root/data    

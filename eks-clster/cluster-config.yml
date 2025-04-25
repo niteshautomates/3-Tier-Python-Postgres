@@ -1,0 +1,15 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: python-pg-app
+  region: ap-south-1
+
+nodeGroups:
+  - name: python-pg-node
+    instanceType: t2.medium
+    desiredCapacity: 3
+    volumeSize: 29
+    ssh:
+      allow: true
+#GM0fSEM2quJ8UMNm%      
