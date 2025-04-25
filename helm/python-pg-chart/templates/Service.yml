@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: python-web-svc
-  namespace: python-web-app
+  namespace: {{ .Values.namespace.name }}
 spec:
   selector:
     app: python-web-app
