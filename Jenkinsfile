@@ -20,7 +20,7 @@ pipeline {
                 python3 -m venv venv
                 chmod -R 755 venv
                 # Activate the virtual environment and install dependencies
-                source venv/bin/activate && \
+                . venv/bin/activate && \
                 pip install --upgrade pip && \
                 pip install -r requirements.txt
                 '''
@@ -30,7 +30,9 @@ pipeline {
             steps {
                 sh '''
                 # Activate the virtual environment and run tests
-                source venv/bin/activate && \
+                . venv/bin/activate && \
+                pip install pytest && \
+                pip install pytest-cov && \
                 pytest --cov=app --cov-report=xml && \
                 pytest --cov=app --cov-report=term-missing --disable-warnings
                 '''
@@ -40,7 +42,7 @@ pipeline {
             steps {
                 withSonarQubeEnv('SonarQube') {
                     sh '''
-                    $SCANNER_HOME/bin/sonar-scanner \
+                    /home/niteshops01/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/SonarQube/bin/sonar-scanner \
                         -Dsonar.projectKey=3-Tier-Python-Postgres \
                         -Dsonar.projectName=3-Tier-Python-Postgres \
                         -Dsonar.exclusions=venv/** \
