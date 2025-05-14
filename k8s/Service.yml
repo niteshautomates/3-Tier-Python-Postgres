@@ -10,8 +10,8 @@ spec:
   ports:
   - name: http
     protocol: TCP
-    port: 8500
-    targetPort: 8500
+    port: 5000
+    targetPort: 5000
     # If you set the `spec.type` field to `NodePort` and you want a specific port number,
     # you can specify a value in the `spec.ports[*].nodePort` field.
    

@@ -23,7 +23,7 @@ spec:
       - name:  python-web-app
         image: nitesh2611/python-web-app:latest
         ports:
-        - containerPort:  8500
+        - containerPort:  5000
         imagePullPolicy: Always
         resources:
           requests:
