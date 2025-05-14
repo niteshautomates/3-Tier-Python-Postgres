@@ -38,7 +38,7 @@ spec:
                 key: POSTGRES_PASSWORD
           - name: POSTGRES_DB
             valueFrom:
-              secretKeyRef:
+              configMapKeyRef:
                 name: pgsql-config
                 key: POSTGRES_DB
           volumeMounts:
