@@ -11,7 +11,7 @@ spec:
     matchLabels:
       app: postgresql
   strategy:
-    tyoe: Recreate
+    type: Recreate
   template:
     metadata:
       name: postgresql
