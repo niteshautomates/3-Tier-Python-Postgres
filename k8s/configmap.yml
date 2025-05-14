@@ -4,4 +4,4 @@ metadata:
   name: pgsql-config
   namespace: python-web-app
 data:
-  MYSQL_DATABASE: "my_database"
+  POSTGRES_DB: "my_database"
