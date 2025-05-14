@@ -21,7 +21,7 @@ spec:
           # - Each init container must complete successfully before the next one starts.
       containers:
       - name:  python-web-app
-        image: nitesh2611/python-web-app:latest
+        image: nitesh2611/python-pg-db:latest
         ports:
         - containerPort:  5000
         imagePullPolicy: Always
