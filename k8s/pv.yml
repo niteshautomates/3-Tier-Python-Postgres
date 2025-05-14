@@ -10,6 +10,6 @@ spec:
     - ReadWriteOnce
   volumeMode: Filesystem
   provisioner:
-  storageClassName: local-storage  
+  storageClassName: ebs-sc
   hostPath:
     path: /root/data    
