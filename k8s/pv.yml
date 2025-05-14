@@ -9,6 +9,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   volumeMode: Filesystem
+  provisioner:
   storageClassName: local-storage  
   hostPath:
     path: /root/data    

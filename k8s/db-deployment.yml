@@ -10,6 +10,8 @@ spec:
   selector:
     matchLabels:
       app: postgresql
+  strategy:
+    tyoe: Recreate
   template:
     metadata:
       name: postgresql
@@ -18,14 +20,32 @@ spec:
     spec:
       containers:
         - name: python-pg-db
-          image: nitesh2611/python-pg-db:14557629597
+          image: nitesh2611/python-pg-db:latest
           ports:
             - containerPort: 5432
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "500m"
+            limits:
+              memory: "1Gi"
+              cpu: "1"
+          env:
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: pgsql-secret
+                key: POSTGRES_PASSWORD
+          - name: POSTGRES_DB
+            valueFrom:
+              secretKeyRef:
+                name: pgsql-config
+                key: POSTGRES_DB
           volumeMounts:
-            - name: local-storage
-              mountPath: /root/data
+            - name: pgsql-data
+              mountPath: /var/lib/pgsql
       volumes:
-        - name: local-storage
+        - name: pgsql-data
           persistentVolumeClaim:
             claimName: pvc
 

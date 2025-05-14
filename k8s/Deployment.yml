@@ -21,7 +21,7 @@ spec:
           # - Each init container must complete successfully before the next one starts.
       containers:
       - name:  python-web-app
-        image: nitesh2611/python-web-app:14557629597
+        image: nitesh2611/python-web-app:latest
         ports:
         - containerPort:  8500
         imagePullPolicy: Always
@@ -32,3 +32,6 @@ spec:
           limits:
             memory: "128Mi"
             cpu: "500m"  
+        env:
+        - name: DATABASE_URL
+          value: postgresql://root:root@pg-service:5432/my_database
