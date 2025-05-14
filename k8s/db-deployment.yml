@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: python-pg-db
-          image: nitesh2611/python-pg-db:latest
+          image: nitesh2611/postgresql:latest
           ports:
             - containerPort: 5432
           resources:
